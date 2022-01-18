@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import BooksItem from './BooksItem';
 
-const BooksList = () => {
-  const books = useSelector((state) => state.booksReducer);
+const BooksList = (props) => {
+  const { books, propsToDeleteBook } = props;
   return (
     <div>
       <h2>Books list</h2>
@@ -15,12 +15,19 @@ const BooksList = () => {
               key={id}
               title={title}
               author={author}
+              propsToDeleteBook={propsToDeleteBook}
+              id={id}
             />
           );
         })
       }
     </div>
   );
+};
+
+BooksList.propTypes = {
+  books: PropTypes.instanceOf(Array).isRequired,
+  propsToDeleteBook: PropTypes.func.isRequired,
 };
 
 export default BooksList;

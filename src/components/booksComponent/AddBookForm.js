@@ -1,9 +1,11 @@
 import { React, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addBook } from '../../redux/books/books';
+import PropTypes from 'prop-types';
 
-const AddBookForm = () => {
-  const dispatch = useDispatch();
+// import { useDispatch } from 'react-redux';
+// import { addBook } from '../../redux/books/books';
+
+const AddBookForm = (props) => {
+  // const dispatch = useDispatch();
   const [formState, setFormState] = useState({
     title: '',
     author: '',
@@ -16,10 +18,13 @@ const AddBookForm = () => {
     });
   };
 
+  const { propsToAddBook } = props;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formState.title.trim() && formState.author.trim()) {
-      dispatch(addBook(formState));
+      // dispatch(addBook(formState));
+      propsToAddBook(formState.title, formState.author);
       setFormState({
         title: '',
         author: '',
@@ -53,8 +58,8 @@ const AddBookForm = () => {
   );
 };
 
-// AddBookForm.propTypes = {
-//   propsToAddBook: PropTypes.func.isRequired,
-// };
+AddBookForm.propTypes = {
+  propsToAddBook: PropTypes.func.isRequired,
+};
 
 export default AddBookForm;

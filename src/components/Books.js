@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import AddBookForm from './booksComponent/AddBookForm';
 import BooksList from './booksComponent/BooksList';
-import { addBook } from '../redux/books/books';
+import { addBook, removeBook } from '../redux/books/books';
 
 const Books = () => {
   const myBooks = useSelector((state) => state.booksReducer);
@@ -11,7 +11,7 @@ const Books = () => {
 
   const addNewBook = (title, author) => {
     const newBook = {
-      id: uuid(),
+      id: uuidv4(),
       title,
       author,
     };
@@ -19,10 +19,12 @@ const Books = () => {
     dispatch(addBook(newBook));
   };
 
+  const deleteBook = (id) => dispatch(removeBook(id));
+
   if (myBooks.length) {
     return (
       <div>
-        <BooksList />
+        <BooksList books={myBooks} propsToDeleteBook={deleteBook} />
         <AddBookForm propsToAddBook={addNewBook} />
       </div>
     );

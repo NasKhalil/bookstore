@@ -1,11 +1,7 @@
 import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 
-// import { useDispatch } from 'react-redux';
-// import { addBook } from '../../redux/books/books';
-
 const AddBookForm = (props) => {
-  // const dispatch = useDispatch();
   const [formState, setFormState] = useState({
     title: '',
     author: '',
@@ -23,7 +19,6 @@ const AddBookForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formState.title.trim() && formState.author.trim()) {
-      // dispatch(addBook(formState));
       propsToAddBook(formState.title, formState.author);
       setFormState({
         title: '',

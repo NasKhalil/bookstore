@@ -1,11 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const BooksItem = () => (
-  <div>
-    <h2>Mein Kampf</h2>
-    <p>Adolf Hitler</p>
-    <button type="button">Delete</button>
-  </div>
-);
+const BooksItem = (props) => {
+  const {
+    id, title, author, propsToDeleteBook,
+  } = props;
+
+  const deleteBook = (e) => {
+    const bookId = e.target.dataset.bookid;
+    propsToDeleteBook(bookId);
+  };
+  return (
+    <div>
+      <h2>{title}</h2>
+      <p>{author}</p>
+      <button onClick={deleteBook} data-bookid={id} type="button">Delete</button>
+    </div>
+  );
+};
+
+BooksItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  propsToDeleteBook: PropTypes.func.isRequired,
+};
 
 export default BooksItem;

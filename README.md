@@ -6,6 +6,10 @@ In this project, I will build a Single Page App (SPA), I will create an MVP vers
 - Add a book.
 - Remove a selected book.
 
+## Screenshot
+
+![](./src/images/screenshot.png)
+
 ## Live demo link
 
 - Netlify live demo [link](https://reactappbookstore.netlify.app)

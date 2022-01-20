@@ -1,20 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteBook } from '../../redux/books/books';
 
 const BooksItem = (props) => {
+  const dispatch = useDispatch();
   const {
-    id, title, author, propsToDeleteBook,
+    id, title, category,
   } = props;
 
-  const deleteBook = (e) => {
+  const handleDeleteBook = (e) => {
     const bookId = e.target.dataset.bookid;
-    propsToDeleteBook(bookId);
+    dispatch(deleteBook(bookId));
   };
   return (
     <div>
       <h2>{title}</h2>
-      <p>{author}</p>
-      <button onClick={deleteBook} data-bookid={id} type="button">Delete</button>
+      <p>{category}</p>
+      <button onClick={handleDeleteBook} data-bookid={id} type="button">Delete</button>
     </div>
   );
 };
@@ -22,8 +25,7 @@ const BooksItem = (props) => {
 BooksItem.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  propsToDeleteBook: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 export default BooksItem;

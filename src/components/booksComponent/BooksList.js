@@ -3,19 +3,18 @@ import PropTypes from 'prop-types';
 import BooksItem from './BooksItem';
 
 const BooksList = (props) => {
-  const { books, propsToDeleteBook } = props;
+  const { books } = props;
   return (
     <div>
       <h2>Books list</h2>
       {
         books.map((book) => {
-          const { id, title, author } = book;
+          const { id, title, category } = book;
           return (
             <BooksItem
               key={id}
               title={title}
-              author={author}
-              propsToDeleteBook={propsToDeleteBook}
+              category={category}
               id={id}
             />
           );
@@ -27,7 +26,6 @@ const BooksList = (props) => {
 
 BooksList.propTypes = {
   books: PropTypes.instanceOf(Array).isRequired,
-  propsToDeleteBook: PropTypes.func.isRequired,
 };
 
 export default BooksList;

@@ -1,29 +1,32 @@
 import { React, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { postBook } from '../../redux/books/books';
 
-const AddBookForm = (props) => {
-  const [formState, setFormState] = useState({
-    title: '',
-    author: '',
-  });
+const categoriesArr = ['Choose a Category', 'Action', 'Drama', 'Children Books', 'Romance', 'Comedy', 'Horror', 'Science', 'Health', 'History', 'Business'];
+
+const AddBookForm = () => {
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState(categoriesArr[0]);
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    });
+    setTitle(e.target.value);
   };
 
-  const { propsToAddBook } = props;
+  const book = {
+    item_id: uuidv4(),
+    title,
+    category,
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formState.title.trim() && formState.author.trim()) {
-      propsToAddBook(formState.title, formState.author);
-      setFormState({
-        title: '',
-        author: '',
-      });
+    if (title && category) {
+      dispatch(postBook(book));
+      setTitle('');
+      setCategory(categoriesArr[0]);
+      e.target.reset();
     }
   };
 
@@ -36,25 +39,18 @@ const AddBookForm = (props) => {
           placeholder="Book Title"
           onChange={onChange}
           name="title"
-          value={formState.title}
+          value={title}
           required
         />
-        <input
-          type="text"
-          placeholder="Author"
-          onChange={onChange}
-          name="author"
-          value={formState.author}
-          required
-        />
+        <select name="category" onChange={(category) => setCategory(category.target.value)}>
+          {categoriesArr.map((category) => (
+            <option key={category} value={category}>{category}</option>
+          ))}
+        </select>
         <button type="submit">Add Book</button>
       </form>
     </div>
   );
-};
-
-AddBookForm.propTypes = {
-  propsToAddBook: PropTypes.func.isRequired,
 };
 
 export default AddBookForm;

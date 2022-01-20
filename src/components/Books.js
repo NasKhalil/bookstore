@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBooks } from '../redux/books/books';
 import AddBookForm from './booksComponent/AddBookForm';
 import BooksList from './booksComponent/BooksList';
+import '../App.css';
 
 const Books = () => {
   const myBooks = useSelector((state) => state.booksReducer);
@@ -16,6 +17,7 @@ const Books = () => {
     return (
       <div>
         <BooksList books={myBooks} />
+        <hr />
         <AddBookForm />
       </div>
     );
@@ -24,6 +26,7 @@ const Books = () => {
   return (
     <div>
       <h3>There is no book yet</h3>
+      <hr />
       <AddBookForm />
     </div>
   );

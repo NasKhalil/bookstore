@@ -1,1 +1,33 @@
-/* headline styles */
+.header {
+  height: 5rem;
+  background-color: #fff;
+  padding: 0 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 64px;
+}
+
+.header a {
+  color: #121212;
+  text-decoration: none;
+  opacity: 0.5;
+}
+
+nav h2 {
+  color: #0290ff;
+  font-size: 1.875rem;
+  font-weight: 900;
+}
+
+.header div {
+  color: #0290ff;
+  font-size: 1.875rem;
+}
